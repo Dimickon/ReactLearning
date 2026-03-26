@@ -8,8 +8,8 @@ function App() {
     <div className="App">
       <MyComponent />
       <OtherComponent />
-      <PetInfo animal="cat" age={23} />
-      <PetInfo animal="dog" age={2} />
+      <PetInfo hasPet animal="cat" age={23} />
+      <PetInfo hasPet={false} animal="dog" age={2} />
     </div>
   );
 }
