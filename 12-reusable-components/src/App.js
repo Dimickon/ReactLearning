@@ -8,6 +8,8 @@ import RandomNumber from './Components/RandomNumber';
 import Button from './Components/Button';
 import Counter from './Components/Counter';
 
+const textsButtons = ['Прибавить', 'Добавить', 'Увеличить'];
+
 function App() {
   const [count, setCount] = useState(0);
   const incrementCount = () => {
@@ -34,9 +36,15 @@ function App() {
 
       {/* Изменение состояния из дочернего элемента */}
       <Counter count={count} />
-      <Button onClick={incrementCount} text="Добавить" />
-      <Button onClick={decrementCount} text="Убавить" />
-      <Button text="Бездействие" />
+      <Button onClick={incrementCount} text={'Добавить'} />
+      <Button onClick={decrementCount} text={'Убавить'} />
+      <Button text={'Бездействие'} />
+
+      {/* Перебор массива */}
+      <Counter count={count} />
+      {textsButtons.map((text, index) => {
+        return <Button onClick={incrementCount} text={text} key={index} />;
+      })}
     </div>
   );
 }
