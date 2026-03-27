@@ -37,3 +37,16 @@ button {
   border: 1px solid white;
   border-radius: 12px;
 }
+
+form {
+  font-size: 20px;
+}
+
+label {
+  display: block;
+}
+
+input {
+  margin: 16px;
+  padding: 10px;
+}

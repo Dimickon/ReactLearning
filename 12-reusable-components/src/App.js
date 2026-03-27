@@ -9,6 +9,8 @@ import Button from './Components/Button';
 import Counter from './Components/Counter';
 import Persons from './Components/Persons';
 import Card from './Components/Card';
+import LoginUncontrolled from './Components/LoginUncontrolled';
+import LoginControlled from './Components/LoginControlled';
 
 const textsButtons = ['Прибавить', 'Добавить', 'Увеличить'];
 
@@ -91,6 +93,16 @@ function App() {
       {/* React Fragment */}
       <div className="lesson">
         <Card />
+      </div>
+
+      {/* Обработка форм с неконтролируемыми инпутами */}
+      <div className="lesson">
+        <LoginUncontrolled />
+      </div>
+
+      {/* Обработка форм с контролируемыми инпутами */}
+      <div className="lesson">
+        <LoginControlled />
       </div>
     </div>
   );
