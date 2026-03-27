@@ -8,6 +8,7 @@ import RandomNumber from './Components/RandomNumber';
 import Button from './Components/Button';
 import Counter from './Components/Counter';
 import Persons from './Components/Persons';
+import Card from './Components/Card';
 
 const textsButtons = ['Прибавить', 'Добавить', 'Увеличить'];
 
@@ -85,6 +86,11 @@ function App() {
             </button>
           </div>
         )}
+      </div>
+
+      {/* React Fragment */}
+      <div className="lesson">
+        <Card />
       </div>
     </div>
   );
