@@ -21,6 +21,11 @@ function App() {
     setCount(count - 1);
   };
 
+  const resetCount = () => {
+    setCount(0);
+  };
+  const buttonStyle = { backgroundColor: 'lightgreen' };
+
   return (
     <div className="App">
       <div className="lesson">
@@ -51,7 +56,7 @@ function App() {
         <Counter count={count} />
         <Button onClick={incrementCount} text={'Добавить'} />
         <Button onClick={decrementCount} text={'Убавить'} />
-        <Button text={'Бездействие'} />
+        <button>Reset</button>
       </div>
 
       {/* Перебор массива */}
@@ -65,6 +70,21 @@ function App() {
       {/* Передача параметров с помощью spread оператора (...) */}
       <div className="lesson lesson--person">
         <Persons />
+      </div>
+
+      {/* Условное отображение блока JSX с условием И */}
+      <div className="lesson">
+        <Counter count={count} />
+        <Button onClick={incrementCount} text={'Добавить'} />
+        <Button onClick={decrementCount} text={'Убавить'} />
+
+        {count > 0 && (
+          <div>
+            <button style={buttonStyle} onClick={resetCount}>
+              Обнулить
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
