@@ -11,6 +11,7 @@ import Persons from './Components/Persons';
 import Card from './Components/Card';
 import LoginUncontrolled from './Components/LoginUncontrolled';
 import LoginControlled from './Components/LoginControlled';
+import Wrapper from './Components/Wrapper';
 
 const textsButtons = ['Прибавить', 'Добавить', 'Увеличить'];
 
@@ -103,6 +104,18 @@ function App() {
       {/* Обработка форм с контролируемыми инпутами */}
       <div className="lesson">
         <LoginControlled />
+      </div>
+
+      {/* Передача элементов через children */}
+      <div className="lesson">
+        <Wrapper color="lightblue">
+          <h2>Text inside of the Wrapper</h2>
+          <button>Click me</button>
+        </Wrapper>
+        <Wrapper color="lightgreen">
+          <h2>another text</h2>
+          <button>Click me</button>
+        </Wrapper>
       </div>
     </div>
   );
