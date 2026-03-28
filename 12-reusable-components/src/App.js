@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './App.css';
 import MyComponent from './Components/MyComponent';
@@ -29,6 +29,16 @@ function App() {
     setCount(0);
   };
   const buttonStyle = { backgroundColor: 'lightgreen' };
+
+  const [todo, setTodo] = useState(null);
+  useEffect(() => {
+    console.log('useEffect');
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then((response) => response.json())
+      .then((json) => setTodo(json));
+  }, []);
+  console.log('App rendered');
+  console.log(todo);
 
   return (
     <div className="App">
@@ -117,6 +127,9 @@ function App() {
           <button>Click me</button>
         </Wrapper>
       </div>
+
+      {/* Использование хука useEffect */}
+      <div className="lesson">{todo && <h1>{todo.title}</h1>}</div>
     </div>
   );
 }
