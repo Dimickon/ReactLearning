@@ -13,6 +13,7 @@ import LoginUncontrolled from './Components/LoginUncontrolled';
 import LoginControlled from './Components/LoginControlled';
 import Wrapper from './Components/Wrapper';
 import Posts from './Components/Posts';
+import Info from './Components/Info';
 
 const textsButtons = ['Прибавить', 'Добавить', 'Увеличить'];
 
@@ -132,6 +133,12 @@ function App() {
       {/* Использование хука useEffect */}
       <div className="lesson">
         <Posts />
+      </div>
+
+      {/* CSS */}
+      <div className="lesson">
+        <Info />
+        <h1>App component</h1>
       </div>
     </div>
   );
