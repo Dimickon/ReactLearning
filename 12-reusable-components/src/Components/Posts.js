@@ -8,12 +8,58 @@ export default function Posts() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
+  // Простой пример
+  // useEffect(() => {
+  //   fetch(API_URL)
+  //     .then((res) => res.json())
+  //     .then((json) => setPost(json))
+  //     .catch((error) => setError(error.message))
+  //     .finally(() => setIsLoading(false));
+  // }, []);
+
+  // Через обычную асинхронную функцию
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const res = await fetch(API_URL);
+  //       const posts = await res.json();
+  //       setPost(posts);
+  //     } catch (error) {
+  //       setError(error.message);
+  //     }
+  //     setIsLoading(false);
+  //   }
+  //   fetchData();
+  // }, []);
+
+  // Через стрелочную асинхронную функцию
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await fetch(API_URL);
+  //       const posts = await res.json();
+  //       setPost(posts);
+  //     } catch (error) {
+  //       setError(error.message);
+  //     }
+  //     setIsLoading(false);
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  // Через IIFE - Interdiately Invoked Function Expression
   useEffect(() => {
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((json) => setPost(json))
-      .catch((error) => setError(error.message))
-      .finally(() => setIsLoading(false));
+    (async function () {
+      try {
+        const res = await fetch(API_URL);
+        const posts = await res.json();
+        setPost(posts);
+      } catch (error) {
+        setError(error.message);
+      }
+      setIsLoading(false);
+    })();
   }, []);
 
   if (error) {
