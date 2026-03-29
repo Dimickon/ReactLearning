@@ -12,6 +12,7 @@ import Card from './Components/Card';
 import LoginUncontrolled from './Components/LoginUncontrolled';
 import LoginControlled from './Components/LoginControlled';
 import Wrapper from './Components/Wrapper';
+import Posts from './Components/Posts';
 
 const textsButtons = ['Прибавить', 'Добавить', 'Увеличить'];
 
@@ -32,13 +33,10 @@ function App() {
 
   const [todo, setTodo] = useState(null);
   useEffect(() => {
-    console.log('useEffect');
     fetch('https://jsonplaceholder.typicode.com/todos/1')
       .then((response) => response.json())
       .then((json) => setTodo(json));
   }, []);
-  console.log('App rendered');
-  console.log(todo);
 
   return (
     <div className="App">
@@ -130,6 +128,11 @@ function App() {
 
       {/* Использование хука useEffect */}
       <div className="lesson">{todo && <h1>{todo.title}</h1>}</div>
+
+      {/* Использование хука useEffect */}
+      <div className="lesson">
+        <Posts />
+      </div>
     </div>
   );
 }

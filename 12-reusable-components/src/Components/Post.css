@@ -1,0 +1,11 @@
+.posts__inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.post {
+  padding: 12px;
+  border: 1px solid white;
+  border-radius: 12px;
+}
