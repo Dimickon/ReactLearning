@@ -1,15 +1,19 @@
 import { useState } from 'react';
-import Todo from './Todo';
 import styles from './TodoForm.module.css';
 
-export default function TodoForm() {
+export default function TodoForm(props) {
+  const { todos, setTodos } = props;
+
   const [data, setData] = useState('');
 
   function handleFormSubmit(event) {
     event.preventDefault();
 
     console.log(data);
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
+
+    setTodos({ ...todos, data });
+    console.log(todos);
   }
 
   function handleInputChange(text) {
