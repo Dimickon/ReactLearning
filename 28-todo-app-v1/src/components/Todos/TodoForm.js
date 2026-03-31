@@ -12,10 +12,10 @@ export default function TodoForm({ addTodo }) {
 
   return (
     <div className="todo__header">
-      <h1>Todo App</h1>
       <form className={styles.todo__form} onSubmit={onSubmitHandler}>
         <label>
           <input
+            className={styles.todo__input}
             type="text"
             value={data}
             onChange={(e) => setData(e.target.value)}
@@ -23,7 +23,9 @@ export default function TodoForm({ addTodo }) {
           />
         </label>
 
-        <button type="submit">Submit</button>
+        <button className={styles.todo__btn} type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
