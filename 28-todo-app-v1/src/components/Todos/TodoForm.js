@@ -12,7 +12,7 @@ export default function TodoForm(props) {
     console.log(data);
     //alert(JSON.stringify(data));
 
-    setTodos({ ...todos, data });
+    setTodos([...todos, data]);
     console.log(todos);
   }
 
