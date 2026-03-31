@@ -16,7 +16,7 @@ export default function Todo() {
 
   return (
     <div className={styles.todo}>
-      <h2 className={styles.todo__heading}>Todo app</h2>
+      <h2 className={styles.todo__heading}>Todo app v1</h2>
       <TodoForm addTodo={addTodoHandler} />
       <TodoList todos={todos} deleteTodo={deleteTodoHandler} />
     </div>
