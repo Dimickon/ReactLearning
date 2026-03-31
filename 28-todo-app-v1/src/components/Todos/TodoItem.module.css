@@ -1,0 +1,9 @@
+.todo__item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 24px;
+
+  font-size: 20px;
+  color: black;
+  background-color: white;
+}
