@@ -4,11 +4,9 @@ import styles from './TodoList.module.css';
 export default function TodoList({ todos }) {
   return (
     <div className={styles.todo__list}>
-      {todos ? (
-        todos.map((todo, index) => <TodoItem key={index} todo={todo} />)
-      ) : (
-        <h1>Список пуст</h1>
-      )}
+      {todos.map((todo, index) => (
+        <TodoItem key={index} todo={todo} />
+      ))}
     </div>
   );
 }

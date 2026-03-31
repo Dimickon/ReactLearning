@@ -3,11 +3,15 @@ import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
 export default function Todo() {
-  const [todos, setTodos] = useState(['todo 1', 'todo 2']);
+  const [todos, setTodos] = useState([]);
+
+  const addTodoHandler = (text) => {
+    setTodos([...todos, text]);
+  };
 
   return (
     <div>
-      <TodoForm todos={todos} setTodos={setTodos} />
+      <TodoForm addTodo={addTodoHandler} />
       <TodoList todos={todos} />
     </div>
   );
