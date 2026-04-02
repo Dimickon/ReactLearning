@@ -32,7 +32,7 @@ export default function TodoForm({ addTodo }) {
             }}
             placeholder="Enter new todo"
           />
-          <span>{errorTitle}</span>
+          {Boolean(errorTitle.length) && <span>{errorTitle}</span>}
         </label>
 
         <button className={styles.todo__btn} type="submit">
