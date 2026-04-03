@@ -1,9 +1,38 @@
-.todo__item {
+.todoItem {
   display: flex;
+  justify-content: space-between;
   gap: 12px;
   padding: 12px 24px;
 
   font-size: 20px;
   color: black;
   background-color: white;
+}
+
+.todoItemCompleted {
+  opacity: 0.6;
+}
+
+.todoHeading,
+.todoControll {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.todoItem .todoIcon {
+  color: grey;
+  transition: color 0.3s linear, transform 0.3s linear;
+}
+
+.todoControll .todoIcon:hover {
+  transform: scale(1.2);
+}
+
+.todoControll .todoIconDelete:hover {
+  color: red;
+}
+
+.todoControll .todoIconComplete:hover {
+  color: green;
 }
