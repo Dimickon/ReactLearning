@@ -67,6 +67,7 @@ export default function Todo() {
         todos={todos}
         deleteTodo={deleteTodoHandler}
         toggleTodo={toggleTodoHandler}
+        completedTodosCount={completedTodosCount}
       />
     </div>
   );

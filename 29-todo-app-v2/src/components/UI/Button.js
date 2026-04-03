@@ -1,14 +1,10 @@
 import styles from './Button.module.css';
 console.log(styles);
 
-export default function Button({ onClick, children, title, disabled = false }) {
+export default function Button(props) {
+  const { children, disabled = false } = props;
   return (
-    <button
-      className={styles.button}
-      onClick={onClick}
-      title={title}
-      disabled={disabled}
-    >
+    <button {...props} className={styles.button} disabled={disabled}>
       {children}
     </button>
   );

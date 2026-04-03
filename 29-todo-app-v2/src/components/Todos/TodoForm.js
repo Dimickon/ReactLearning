@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from '../UI/Button';
 import styles from './TodoForm.module.css';
 
 export default function TodoForm({ addTodo }) {
@@ -35,9 +36,9 @@ export default function TodoForm({ addTodo }) {
           {Boolean(errorTitle.length) && <span>{errorTitle}</span>}
         </label>
 
-        <button className={styles.todo__btn} type="submit">
+        <Button className={styles.todo__btn} type="submit" title="submit">
           Submit
-        </button>
+        </Button>
       </form>
     </div>
   );
