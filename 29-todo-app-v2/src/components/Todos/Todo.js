@@ -21,7 +21,7 @@ export default function Todo() {
     const newTodo = {
       id: uuidv4(),
       text,
-      isCompleteed: false,
+      isCompleted: false,
     };
     console.log(newTodo);
     setTodos([...todos, newTodo]);
@@ -31,11 +31,25 @@ export default function Todo() {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const toggleTodoHandler = (id) => {
+    setTodos(
+      todos.map((todo) => {
+        return todo.id === id
+          ? { ...todo, isCompleted: !todo.isCompleted }
+          : { ...todo };
+      })
+    );
+  };
+
   return (
     <div className={styles.todo}>
       <h2 className={styles.todo__heading}>Todo app v1</h2>
       <TodoForm addTodo={addTodoHandler} />
-      <TodoList todos={todos} deleteTodo={deleteTodoHandler} />
+      <TodoList
+        todos={todos}
+        deleteTodo={deleteTodoHandler}
+        toggleTodo={toggleTodoHandler}
+      />
     </div>
   );
 }

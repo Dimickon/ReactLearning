@@ -2,9 +2,13 @@ import { RiTodoFill, RiDeleteBin2Line } from 'react-icons/ri';
 import { FaCheck } from 'react-icons/fa';
 import styles from './TodoItem.module.css';
 
-export default function TodoItem({ todo, deleteTodo }) {
+export default function TodoItem({ todo, deleteTodo, toggleTodo }) {
   return (
-    <div className={[styles.todoItem].join(' ')}>
+    <div
+      className={`${styles.todoItem} ${
+        todo.isCompleted ? styles.todoItemCompleted : ''
+      }`}
+    >
       <div className={styles.todoMain}>
         <div className={styles.todoHeading}>
           <RiTodoFill className={styles.todoIcon} />
@@ -18,6 +22,7 @@ export default function TodoItem({ todo, deleteTodo }) {
         />
         <FaCheck
           className={[styles.todoIcon, styles.todoIconComplete].join(' ')}
+          onClick={() => toggleTodo(todo.id)}
         />
       </div>
     </div>
