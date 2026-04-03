@@ -4,10 +4,7 @@ import styles from './TodoItem.module.css';
 
 export default function TodoItem({ todo, deleteTodo }) {
   return (
-    <div
-      className={[styles.todoItem].join(' ')}
-      onDoubleClick={() => deleteTodo(todo.id)}
-    >
+    <div className={[styles.todoItem].join(' ')}>
       <div className={styles.todoMain}>
         <div className={styles.todoHeading}>
           <RiTodoFill className={styles.todoIcon} />
@@ -17,6 +14,7 @@ export default function TodoItem({ todo, deleteTodo }) {
       <div className={styles.todoControll}>
         <RiDeleteBin2Line
           className={[styles.todoIcon, styles.todoIconDelete].join(' ')}
+          onClick={() => deleteTodo(todo.id)}
         />
         <FaCheck
           className={[styles.todoIcon, styles.todoIconComplete].join(' ')}
