@@ -2,9 +2,30 @@
   text-align: center;
 }
 
+/* Used by default with NavLink */
+.active {
+  opacity: 0.6;
+}
+
+/* Custom class with NavLink */
+.activeLink {
+  opacity: 0.6;
+}
+
 h1 {
   font-size: 90px;
   margin-top: 20px;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+a {
+  color: white;
+  font-size: 30px;
 }
 
 button {
