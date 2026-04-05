@@ -3,6 +3,8 @@ import MainLayout from './layouts/MainLayout';
 import Home from './components/Home';
 import Contacts from './components/Contacts';
 import About from './components/About';
+import Courses from './components/Courses';
+import SingleCourse from './components/SingleCourse';
 import './App.css';
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
             <Route path="*" element={<h1>Not found</h1>} />
             <Route path="about" element={<About />} />
             <Route path="contacts" element={<Contacts />} />
+            <Route path="courses" element={<Courses />} />
+            <Route path="courses/:courseSlug" element={<SingleCourse />} />
           </Route>
         </Routes>
       </div>

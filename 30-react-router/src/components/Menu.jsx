@@ -19,6 +19,7 @@ const Menu = () => {
         >
           About
         </NavLink>
+        <NavLink to="courses">Courses</NavLink>
         <NavLink to="contacts">Contacts</NavLink>
         <NavLink to="contact">NF</NavLink>
       </nav>

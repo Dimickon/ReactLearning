@@ -12,6 +12,11 @@
   opacity: 0.6;
 }
 
+.coursesContent {
+  display: flex;
+  flex-direction: column;
+}
+
 h1 {
   font-size: 90px;
   margin-top: 20px;
