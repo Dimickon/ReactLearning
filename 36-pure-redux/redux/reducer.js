@@ -1,4 +1,4 @@
-const initialState = [];
+const initialState = [1, 2, 3];
 
 function reducer(state = initialState, action) {
   switch (action.type) {
@@ -9,7 +9,7 @@ function reducer(state = initialState, action) {
       return [];
 
     default:
-      state;
+      return state;
   }
 }
 
