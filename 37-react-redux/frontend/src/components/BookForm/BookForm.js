@@ -6,6 +6,7 @@ import './BookForm.css';
 
 const BookForm = () => {
   const initialStateForm = {
+    id: '',
     title: '',
     author: '',
   };
@@ -16,6 +17,7 @@ const BookForm = () => {
     e.preventDefault();
 
     if (formData) {
+      formData.id = uuidv4();
       dispatch(addBook(formData));
     }
 
