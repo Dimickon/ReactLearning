@@ -7,7 +7,6 @@ import './BookForm.css';
 
 const BookForm = () => {
   const initialStateForm = {
-    id: '',
     title: '',
     author: '',
   };
@@ -20,6 +19,7 @@ const BookForm = () => {
     const randomBookWithID = {
       ...randomBook,
       id: uuidv4(),
+      isFavorite: false,
     };
     dispatch(addBook(randomBookWithID));
   };
@@ -28,8 +28,12 @@ const BookForm = () => {
     e.preventDefault();
 
     if (formData) {
-      formData.id = uuidv4();
-      dispatch(addBook(formData));
+      const newBook = {
+        ...formData,
+        id: uuidv4(),
+        isFavorite: false,
+      };
+      dispatch(addBook(newBook));
     }
 
     setFormData(initialStateForm);
