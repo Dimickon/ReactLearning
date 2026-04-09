@@ -5,7 +5,6 @@ import './BookList.css';
 const BookList = () => {
   const books = useSelector((state) => state.books);
   const dispatch = useDispatch();
-  console.log(books);
 
   const handleDeleteBook = (id) => {
     dispatch(deleteBook(id));
