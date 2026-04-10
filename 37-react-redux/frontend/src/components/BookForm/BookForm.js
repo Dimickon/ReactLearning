@@ -34,6 +34,10 @@ const BookForm = () => {
     setFormData({ ...formData, [name]: text });
   }
 
+  const handleAddRandomBookViaAPI = asinc () => {
+
+  }
+
   return (
     <div className="app-block book-form">
       <h2>Add a New Book</h2>
@@ -59,6 +63,9 @@ const BookForm = () => {
         <button type="submit">Add book</button>
         <button type="button" onClick={handleAddRandomBook}>
           Add random
+        </button>
+        <button type="button" onClick={handleAddRandomBook}>
+          Add random via API
         </button>
       </form>
     </div>
