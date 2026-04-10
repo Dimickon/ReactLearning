@@ -7,19 +7,32 @@ const booksSlice = createSlice({
   name: 'books',
   reducers: {
     addBook: (state, action) => {
-      return (state = [...state, action.payload]);
+      state.push(action.payload);
     },
 
     deleteBook: (state, action) => {
       return (state = state.filter((book) => book.id !== action.payload));
+
+      // Решение Богдана с мутированием оригинального массива
+      // const index = state.findIndex((book) => book.id === action.payload)
+      // if (index !== -1) {
+      //   state.splice(index, 1)
+      // }
     },
 
     toggleFavorite: (state, action) => {
-      return (state = state.map((book) =>
-        book.id === action.payload
-          ? { ...book, isFavorite: !book.isFavorite }
-          : book
-      ));
+      state.forEach((book) => {
+        if (book.id === action.payload) {
+          book.isFavorite = !book.isFavorite;
+        }
+      });
+
+      // Изначальное решение без мутации оригинального массива
+      // return (state = state.map((book) =>
+      //   book.id === action.payload
+      //     ? { ...book, isFavorite: !book.isFavorite }
+      //     : book
+      // ));
     },
   },
 });
