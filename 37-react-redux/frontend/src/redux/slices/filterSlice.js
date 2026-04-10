@@ -15,10 +15,13 @@ const filterSlice = createSlice({
       /* Либо формируем новый объект вручную (традиционный подход) */
       //return {...state, title: action.payload}
     },
+    resetFilters: (state) => {
+      return initialState;
+    },
   },
 });
 
 /* Автоматическая деструкторизация setTitleFilter вместо const setTitleFilter = filterSlice.actions.setTitleFilter */
-export const { setTitleFilter } = filterSlice.actions;
+export const { setTitleFilter, resetFilters } = filterSlice.actions;
 export const selectTitleFilter = (state) => state.filter.title;
 export default filterSlice.reducer;
