@@ -30,7 +30,7 @@ const BookList = () => {
       .toLowerCase()
       .includes(authorFilter.toLowerCase());
 
-    if (matchesTitle && matchesAuthor) return matchesTitle;
+    return matchesTitle && matchesAuthor;
   });
 
   return (
