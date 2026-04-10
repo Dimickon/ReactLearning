@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import axios from 'axios';
 //import { addBook } from '../../redux/books/actionCreators';
 import { addBook } from '../../redux/slices/booksSlice';
 import booksData from '../../data/books.json';
@@ -34,9 +35,13 @@ const BookForm = () => {
     setFormData({ ...formData, [name]: text });
   }
 
-  const handleAddRandomBookViaAPI = asinc () => {
-
-  }
+  const handleAddRandomBookViaAPI = async () => {
+    const res = await axios.get('http://localhost:4000/random-book');
+    // Чтобы не проверять res.data &&  можно сократить до res?.data?.title && res?.data?.author
+    if (res?.data?.title && res?.data?.author) {
+      dispatch(addBook(createBookWithID(res.data)));
+    }
+  };
 
   return (
     <div className="app-block book-form">
@@ -64,7 +69,7 @@ const BookForm = () => {
         <button type="button" onClick={handleAddRandomBook}>
           Add random
         </button>
-        <button type="button" onClick={handleAddRandomBook}>
+        <button type="button" onClick={handleAddRandomBookViaAPI}>
           Add random via API
         </button>
       </form>
