@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setTitleFilter,
+  setAuthorFilter,
   selectTitleFilter,
+  selectAuthorFilter,
   resetFilters,
 } from '../../redux/slices/filterSlice';
 import './Filter.css';
@@ -9,9 +11,14 @@ import './Filter.css';
 const Filter = () => {
   const dispatch = useDispatch();
   const titleFilter = useSelector(selectTitleFilter);
+  const authorFilter = useSelector(selectAuthorFilter);
 
   const handleTitleFilterChange = (e) => {
     dispatch(setTitleFilter(e.target.value));
+  };
+
+  const handleAuthorFilterChange = (e) => {
+    dispatch(setAuthorFilter(e.target.value));
   };
 
   const handleResetFilters = () => {
@@ -27,6 +34,14 @@ const Filter = () => {
             placeholder="Filter by title..."
             value={titleFilter}
             onChange={handleTitleFilterChange}
+          />
+        </div>
+        <div className="filter-group">
+          <input
+            type="text"
+            placeholder="Filter by author..."
+            value={authorFilter}
+            onChange={handleAuthorFilterChange}
           />
         </div>
         <button type="button" onClick={handleResetFilters}>
