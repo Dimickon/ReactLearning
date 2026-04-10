@@ -36,10 +36,14 @@ const BookForm = () => {
   }
 
   const handleAddRandomBookViaAPI = async () => {
-    const res = await axios.get('http://localhost:4000/random-book');
-    // Чтобы не проверять res.data &&  можно сократить до res?.data?.title && res?.data?.author
-    if (res?.data?.title && res?.data?.author) {
-      dispatch(addBook(createBookWithID(res.data)));
+    try {
+      const res = await axios.get('http://localhost:4000/random-book');
+      // Чтобы не проверять res.data &&  можно сократить до res?.data?.title && res?.data?.author
+      if (res?.data?.title && res?.data?.author) {
+        dispatch(addBook(createBookWithID(res.data)));
+      }
+    } catch (error) {
+      console.log('error', error);
     }
   };
 
