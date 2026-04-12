@@ -3,7 +3,10 @@ import axios from 'axios';
 import createBookWithID from '../../utils/createBookWithID';
 import { setError } from './errorSlice';
 
-const initialState = [];
+const initialState = {
+  books: [],
+  isLoadingViaAPI: false,
+};
 
 // Интеграция ассинхронной функции в slice с помощью createAsyncThunk. У функции fetchBook по итогам появляются свойства fulfilled, rejected и другие, по которым мы уже выполняем действия в ExtraReducers
 export const fetchBook = createAsyncThunk(
@@ -15,7 +18,11 @@ export const fetchBook = createAsyncThunk(
     } catch (error) {
       thunkAPI.dispatch(setError(error.message));
       // заново генерируем ошибку, чтобы не попасть в extraReducers fetchBook.fulfilled
-      throw error;
+
+      // Option 1
+      return thunkAPI.rejectWithValue(error);
+      // Option 2. Смысл тот же самый
+      //throw error;
     }
   }
 );
@@ -25,11 +32,14 @@ const booksSlice = createSlice({
   name: 'books',
   reducers: {
     addBook: (state, action) => {
-      state.push(action.payload);
+      state.books.push(action.payload);
     },
 
     deleteBook: (state, action) => {
-      return (state = state.filter((book) => book.id !== action.payload));
+      return {
+        ...state,
+        books: state.books.filter((book) => book.id !== action.payload),
+      };
 
       // Решение Богдана с мутированием оригинального массива
       // const index = state.findIndex((book) => book.id === action.payload)
@@ -39,7 +49,7 @@ const booksSlice = createSlice({
     },
 
     toggleFavorite: (state, action) => {
-      state.forEach((book) => {
+      state.books.forEach((book) => {
         if (book.id === action.payload) {
           book.isFavorite = !book.isFavorite;
         }
@@ -55,26 +65,41 @@ const booksSlice = createSlice({
   },
   // OPTION 1
   extraReducers: {
+    [fetchBook.pending]: (state) => {
+      state.isLoadingViaAPI = true;
+    },
     [fetchBook.fulfilled]: (state, action) => {
-      if (action.payload.title && action.payload.author) {
-        state.push(createBookWithID(action.payload, 'API'));
+      state.isLoadingViaAPI = false;
+      if (action.payload?.title && action.payload?.author) {
+        state.books.push(createBookWithID(action.payload, 'API'));
       }
+    },
+    [fetchBook.rejected]: (state) => {
+      state.isLoadingViaAPI = false;
     },
   },
 
   // OPTION 2
   // Выполнение результата ассинхрого запроса из fetchBook
   // extraReducers: (builder) => {
+  //   builder.addCase(fetchBook.pending, (state) => {
+  //     state.isLoadingViaAPI = true;
+  //   });
   //   builder.addCase(fetchBook.fulfilled, (state, action) => {
-  //     if (action.payload.title && action.payload.author) {
-  //       state.push(createBookWithID(action.payload, 'API'));
+  //     state.isLoadingViaAPI = false;
+  //     if (action.payload?.title && action.payload?.author) {
+  //       state.books.push(createBookWithID(action.payload, 'API'));
   //     }
+  //   });
+  //   builder.addCase(fetchBook.rejected, (state) => {
+  //     state.isLoadingViaAPI = false;
   //   });
   // },
 });
 
 export const { addBook, deleteBook, toggleFavorite } = booksSlice.actions;
 
-export const selectBooks = (state) => state.books;
+export const selectBooks = (state) => state.books.books;
+export const selectIsLoadingViaAPI = (state) => state.books.isLoadingViaAPI;
 
 export default booksSlice.reducer;
