@@ -1,8 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import createBookWithID from '../../utils/createBookWithID';
 
 const initialState = [];
+
+// Интеграция ассинхронной функции в slice с помощью createAsyncThunk. У функции fetchBook по итогам появляются свойства fulfilled, rejected и другие, по которым мы уже выполняем действия в ExtraReducers
+export const fetchBook = createAsyncThunk('books/fetchBook', async () => {
+  const res = await axios.get('http://localhost:4000/random-book');
+  return res.data;
+});
 
 const booksSlice = createSlice({
   initialState,
@@ -37,21 +43,18 @@ const booksSlice = createSlice({
       // ));
     },
   },
+  // Выполнение результата ассинхрого запроса из fetchBook
+  extraReducers: (builder) => {
+    builder.addCase(fetchBook.fulfilled, (state, action) => {
+      if (action.payload.title && action.payload.author) {
+        state.push(createBookWithID(action.payload, 'API'));
+      }
+    });
+  },
 });
 
 export const { addBook, deleteBook, toggleFavorite } = booksSlice.actions;
 
-export const thunkFunction = async (dispatch, getState) => {
-  try {
-    const res = await axios.get('http://localhost:4000/random-book');
-    // Чтобы не проверять res.data &&  можно сократить до res?.data?.title && res?.data?.author
-    if (res?.data?.title && res?.data?.author) {
-      dispatch(addBook(createBookWithID(res.data, 'API')));
-    }
-  } catch (error) {
-    console.log('error', error);
-  }
-};
 export const selectBooks = (state) => state.books;
 
 export default booksSlice.reducer;
