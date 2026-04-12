@@ -1,14 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import createBookWithID from '../../utils/createBookWithID';
+import { setError } from './errorSlice';
 
 const initialState = [];
 
 // Интеграция ассинхронной функции в slice с помощью createAsyncThunk. У функции fetchBook по итогам появляются свойства fulfilled, rejected и другие, по которым мы уже выполняем действия в ExtraReducers
-export const fetchBook = createAsyncThunk('books/fetchBook', async () => {
-  const res = await axios.get('http://localhost:4000/random-book');
-  return res.data;
-});
+export const fetchBook = createAsyncThunk(
+  'books/fetchBook',
+  async (url, thunkAPI) => {
+    try {
+      const res = await axios.get(url);
+      return res.data;
+    } catch (error) {
+      thunkAPI.dispatch(setError(error.message));
+      // заново генерируем ошибку, чтобы не попасть в extraReducers fetchBook.fulfilled
+      throw error;
+    }
+  }
+);
 
 const booksSlice = createSlice({
   initialState,
