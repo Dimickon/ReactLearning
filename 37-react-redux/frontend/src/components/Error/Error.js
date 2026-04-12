@@ -11,7 +11,7 @@ const Error = () => {
   useEffect(() => {
     if (errorMessage) {
       toast.info(errorMessage);
-      dispatch(clearError);
+      dispatch(clearError());
     }
   }, [errorMessage, dispatch]);
   return <ToastContainer position="top-right" autoClose={2000} />;

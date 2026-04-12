@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 //import { addBook } from '../../redux/books/actionCreators';
 import { addBook, fetchBook } from '../../redux/slices/booksSlice';
+import { setError } from '../../redux/slices/errorSlice';
 import booksData from '../../data/books.json';
 import createBookWithID from '../../utils/createBookWithID';
 import './BookForm.css';
@@ -22,9 +23,18 @@ const BookForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
 
-    if (formData) {
+    // Проверка объекта с полями форм на заполненность всех полей
+    const isFormValid = Object.values(formData).every((value) => {
+      if (typeof value === 'string') return value.trim() !== '';
+      return value !== null && value !== undefined;
+    });
+
+    if (isFormValid) {
       dispatch(addBook(createBookWithID(formData, 'manual')));
+    } else {
+      dispatch(setError('You must fill title and author!'));
     }
 
     setFormData(initialStateForm);
